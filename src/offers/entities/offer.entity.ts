@@ -10,4 +10,10 @@ export class Offer {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  amount: number;
+
+  @Column()
+  hidden: boolean;
 }

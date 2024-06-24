@@ -10,4 +10,19 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  username: string;
+
+  @Column()
+  about: string;
+
+  @Column()
+  avatar: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
 }

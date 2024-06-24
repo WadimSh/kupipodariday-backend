@@ -10,4 +10,13 @@ export class Wishlist {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  name: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  image: string;
 }

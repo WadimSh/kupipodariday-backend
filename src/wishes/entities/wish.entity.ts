@@ -10,4 +10,25 @@ export class Wish {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  name: string;
+
+  @Column()
+  link: string;
+
+  @Column()
+  image: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  price: number;
+
+  @Column()
+  raised: number;
+
+  @Column()
+  copied: number;
 }
