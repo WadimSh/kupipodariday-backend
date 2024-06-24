@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, ManyToOne } from "typeorm";
+
+import { User } from "src/users/entities/user.entity";
+import { Wish } from "src/wishes/entities/wish.entity";
 
 @Entity()
 export class Offer {
@@ -16,4 +19,12 @@ export class Offer {
 
   @Column()
   hidden: boolean;
+
+  @Column()
+  @ManyToOne(() => User, (user) => user.offers)
+  user: User;
+
+  @Column()
+  @ManyToOne(() => Wish, (wish) => wish.offers)
+  item: Wish;
 }

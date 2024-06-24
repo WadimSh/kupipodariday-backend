@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, OneToMany, ManyToOne } from "typeorm";
+
+import { User } from "src/users/entities/user.entity";
+import { Offer } from "src/offers/entities/offer.entity";
 
 @Entity()
 export class Wish {
@@ -31,4 +34,12 @@ export class Wish {
 
   @Column()
   copied: number;
+
+  @Column()
+  @ManyToOne(() => User, (user) => user.wishes)
+  owner: User;
+
+  @Column()
+  @OneToMany(() => Offer, (offer) => offer.item)
+  offers: Offer[];
 }

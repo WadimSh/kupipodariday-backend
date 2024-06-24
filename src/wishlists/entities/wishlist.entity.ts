@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, OneToMany } from "typeorm";
+
+import { Wish } from "src/wishes/entities/wish.entity";
 
 @Entity()
 export class Wishlist {
@@ -19,4 +21,8 @@ export class Wishlist {
 
   @Column()
   image: string;
+
+  @Column()
+  @OneToMany(() => Wish, (wish) => wish.id)
+  items: Wish[];
 }
