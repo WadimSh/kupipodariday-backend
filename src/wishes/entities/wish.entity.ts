@@ -64,11 +64,9 @@ export class Wish {
   @IsPositive()
   copied: number;
 
-  @Column()
   @ManyToOne(() => User, (user) => user.wishes)
   owner: User;
 
-  @Column()
   @OneToMany(() => Offer, (offer) => offer.item)
   offers: Offer[];
 }
