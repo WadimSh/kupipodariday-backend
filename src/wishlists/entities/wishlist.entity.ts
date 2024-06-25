@@ -28,7 +28,7 @@ export class Wishlist {
     default: '',
   })
   @IsString()
-  @Length(1500)
+  @Length(0, 1500)
   description: string;
 
   @Column()
