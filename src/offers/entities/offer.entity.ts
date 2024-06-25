@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, ManyToOne } from "typeorm";
+import { IsBoolean, IsPositive } from "class-validator";
 
 import { User } from "src/users/entities/user.entity";
 import { Wish } from "src/wishes/entities/wish.entity";
@@ -14,10 +15,18 @@ export class Offer {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column()
+  @Column({
+    type: 'decimal',
+    scale: 2,
+  })
+  @IsPositive()
   amount: number;
 
-  @Column()
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
+  @IsBoolean()
   hidden: boolean;
 
   @Column()
