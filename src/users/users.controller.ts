@@ -1,34 +1,49 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
+import { Request as IRequest } from "express";
+
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UserProfileResponseDto } from './dto/user-profile-response.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FindUsersDto } from './dto/find-users.dto';
+
+export interface RequestOneUser extends IRequest {
+  user: UserProfileResponseDto;
+}
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  @Get('me')
+  findOne(@Req() req: RequestOneUser) {
+    return req.user;
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+  @Patch('me')
+  async updateOne(@Req() req: RequestOneUser, @Body() updateUserDto: UpdateUserDto) {
+    const user = await this.usersService.updateOne(req.user.id, updateUserDto);
+    return user;
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  @Get('me/wishes')
+  async findOneUserWishes(@Req() req: RequestOneUser) {
+    return await this.usersService.findOneUserWishes(req.user.id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  @Get(':username')
+  async getUser(@Param('username') username: string) {
+    const user = await this.usersService.getUser(username);
+    return user;
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  @Get(':username/wishes')
+  async getUserWishes(@Param('username') username: string) {
+    const wishes = await this.usersService.getUserWishes(username);
+    return wishes;
+  }
+
+  @Post('find')
+  async findMany(@Body() findUsersDto: FindUsersDto) {
+    return await this.usersService.findMany(findUsersDto.query);
   }
 }
