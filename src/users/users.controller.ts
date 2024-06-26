@@ -7,7 +7,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { FindUsersDto } from './dto/find-users.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
-export interface RequestOneUser extends IRequest {
+interface RequestOneUser extends IRequest {
   user: UserProfileResponseDto;
 }
 

@@ -10,7 +10,7 @@ export class Wish {
   id: number;
 
   @CreateDateColumn()
-  createAt: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
