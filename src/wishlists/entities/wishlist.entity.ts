@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column, OneToMany, ManyToOne } from "typeorm";
 import { IsString, IsUrl, Length } from "class-validator";
 
 import { Wish } from "src/wishes/entities/wish.entity";
+import { User } from "src/users/entities/user.entity";
 
 @Entity()
 export class Wishlist {
@@ -9,7 +10,7 @@ export class Wishlist {
   id: number;
 
   @CreateDateColumn()
-  createAt: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
@@ -37,4 +38,8 @@ export class Wishlist {
 
   @OneToMany(() => Wish, (wish) => wish.id)
   items: Wish[];
+
+  //есть в swaggerв, но нет в схеме описании данное свойство 
+  @ManyToOne(() => User, (user) => user.wishlists)
+  owner: User;
 }

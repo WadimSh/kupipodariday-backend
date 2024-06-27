@@ -7,6 +7,7 @@ import { OffersModule } from './offers/offers.module';
 import { UsersModule } from './users/users.module';
 import { WishesModule } from './wishes/wishes.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { WishlistsModule } from './wishlists/wishlists.module';
     OffersModule,
     WishesModule,
     WishlistsModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       type: "postgres",
       host: '127.0.0.1',
